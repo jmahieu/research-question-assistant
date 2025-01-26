@@ -32,9 +32,25 @@
         }
         .description {
             margin-bottom: 20px;
-            font-size: 18px;
+            font-size: 14px;
             color: #333;
             line-height: 1.5;
+        }
+        .button-container {
+            margin-bottom: 20px;
+        }
+        .query-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .query-button:hover {
+            background-color: #0056b3;
         }
         iframe {
             width: 100%;
@@ -48,9 +64,19 @@
     <div class="container">
         <img src="https://www.uu.nl/sites/default/files/cm_hs_avatar_corporate.png" alt="Utrecht University Logo" class="logo">
         <div class="description">
-            <p>This chatbot is designed to help you come up with or improve a research question for your thesis or paper. To get started, insert your research question to receive feedback on its relevance, significance, novelty and feasibility. To get better feedback, also briefly position your question within existing literature, explain the data you will use to answer the question, and highlight how you believe answering this question makes a contribution to the field. <b> Important: /<b> This assistant cannot help you with identifying a research gap, your methodology, or any other part that is not directly related to developing the research question itself </p>
+            <p>This chatbot is designed to help you come up with or improve a research question for your thesis or paper. To get started, insert your research question to receive feedback on its relevance, significance, novelty, and feasibility.</p>
         </div>
-        <iframe src="https://copilotstudio.microsoft.com/environments/Default-d72758a0-a446-4e0f-a0aa-4bf95a4a10e7/bots/crb7a_researchQuestionAssistant/webchat?__version__=2" frameborder="0"></iframe>
+        <div class="button-container">
+            <button class="query-button" onclick="setQuery('What are the economic impacts of remote work post-pandemic?')">Example 1</button>
+            <button class="query-button" onclick="setQuery('How does climate change affect agricultural productivity?')">Example 2</button>
+        </div>
+        <iframe id="chat-frame" src="https://copilotstudio.microsoft.com/environments/Default-d72758a0-a446-4e0f-a0aa-4bf95a4a10e7/bots/crb7a_researchQuestionAssistant/webchat?__version__=2" frameborder="0"></iframe>
     </div>
+    <script>
+        function setQuery(query) {
+            const iframe = document.getElementById('chat-frame');
+            iframe.contentWindow.postMessage({ type: 'text', text: query }, '*');
+        }
+    </script>
 </body>
 </html>
